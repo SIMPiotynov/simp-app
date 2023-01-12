@@ -7,16 +7,22 @@ async function fetchUsers() {
   });
 }
 
-async function updateUser(id, data) {
+async function getUserById(id, data) {
   axios.get(`${devUrl}/user/${id}`).then((res) => {
     return res.data;
   });
 }
 
-async function deleteUser(id) {
-  axios.get(`${devUrl}/user/{id}`).then((res) => {
+async function updateUser(id, data) {
+  axios.put(`${devUrl}/user/${id}`).then((res) => {
     return res.data;
   });
 }
 
-export { fetchUsers, updateUser, deleteUser };
+async function deleteUser(id) {
+  axios.delete(`${devUrl}/user/{id}`).then((res) => {
+    return res.data;
+  });
+}
+
+export { fetchUsers, getUserById, updateUser, deleteUser };
