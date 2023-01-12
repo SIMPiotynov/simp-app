@@ -2,6 +2,7 @@ import { PlayCircle, Trash } from "phosphor-react";
 import React, { useState, useEffect } from "react";
 import { useFilePicker } from "use-file-picker";
 import audio from "../assets/sonFusil.mp3";
+import Tr from "../components/Tr";
 import { fetchAlarms } from "../repositories/AlarmRepository";
 
 export default function Sounds() {
@@ -78,7 +79,7 @@ export default function Sounds() {
 
       <table className="w-full mt-10 bg-slate-100">
         <tbody>
-          <tr className="hover:bg-slate-200">
+          <Tr>
             <td className="pl-6">welcome.mp4</td>
             <td className="flex px-6 justify-end">
               <PlayCircle
@@ -93,8 +94,8 @@ export default function Sounds() {
                 className="hover:cursor-pointer my-2 hover:text-red-500"
               />
             </td>
-          </tr>
-          <tr className="hover:bg-slate-200">
+          </Tr>
+          <Tr>
             <td className="pl-6">sonnerie.mp4</td>
             <td className="flex px-6 justify-end">
               <PlayCircle
@@ -108,8 +109,8 @@ export default function Sounds() {
                 className="hover:cursor-pointer my-2 hover:text-red-500"
               />
             </td>
-          </tr>
-          <tr className="hover:bg-slate-200">
+          </Tr>
+          <Tr>
             <td className="pl-6">denied.mp4</td>
             <td className="flex px-6 justify-end">
               <PlayCircle
@@ -123,7 +124,7 @@ export default function Sounds() {
                 className="hover:cursor-pointer my-2 hover:text-red-500"
               />
             </td>
-          </tr>
+          </Tr>
         </tbody>
       </table>
     </div>
