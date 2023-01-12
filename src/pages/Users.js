@@ -3,9 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Tr from "../components/Tr";
 import { fetchUsers } from "../repositories/UserRepository";
+import DeleteAlert from "../components/deleteAlert";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     let response = fetchUsers();
     if (response.statusCode === 200) {
@@ -15,11 +18,19 @@ export default function Users() {
     }
   }, []);
 
+  const handleDelete = () => {
+    // TODO : delete user
+    setShowModal(!showModal)
+  }
+
   return (
     <div className="w-full h-full p-6">
       <div className="text-3xl text-slate-700 text-right font-bold">
         Utilisateurs
       </div>
+      {showModal && (
+          <DeleteAlert onConfirm={handleDelete} onCancel={() => setShowModal(!showModal)}/>
+      )}
       <table className="w-full mt-10 bg-slate-100">
         <thead>
           <tr className="bg-slate-300">
@@ -46,6 +57,7 @@ export default function Users() {
                 weight="bold"
                 size="20"
                 className="hover:cursor-pointer my-2 hover:text-red-500"
+                onClick={() => setShowModal(!showModal)}
               />
             </td>
           </Tr>
@@ -85,6 +97,7 @@ export default function Users() {
           </Tr>
         </tbody>
       </table>
+
     </div>
   );
 }

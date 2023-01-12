@@ -58,7 +58,7 @@ export default function Sounds() {
             </button>
             {filesContent.length === 0 && (
               <h3 className="text-lg leading-6 font-medium text-gray-800 my-4">
-                Aucun fichier selectionné
+                Aucun fichier sélectionné
               </h3>
             )}
             {filesContent.map((file) => {
