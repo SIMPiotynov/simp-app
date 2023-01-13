@@ -13,7 +13,7 @@ async function getUserById(id, data) {
 }
 
 async function updateUser(id, data) {
-  const response = await axios.put(`${devUrl}/users/${id}`)
+  const response = await axios.put(`${devUrl}/users/${id}`, data)
     return response.data;
 }
 

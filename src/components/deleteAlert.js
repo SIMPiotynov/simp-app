@@ -6,7 +6,6 @@ export const DeleteAlert = forwardRef(({ reload }, ref) => {
         show: (user) => {
             setUser(user);
             setVisible(true)
-            console.log(user.id)
         }
     }))
 

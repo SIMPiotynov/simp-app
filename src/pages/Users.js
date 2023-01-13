@@ -67,8 +67,7 @@ export default function Users() {
                   </td>
                   <td className="flex px-6 justify-end">
                     <Link
-                      to="/users/1"
-                      state={{ name: "Nicolas", lastName: "Mary" }}
+                      to={`/users/${user.id}`}
                     >
                       <PencilLine
                         weight="bold"
