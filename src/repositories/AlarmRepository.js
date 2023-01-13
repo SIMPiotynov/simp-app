@@ -12,4 +12,10 @@ async function deleteAlarm(id) {
   return response.data;
 }
 
-export { fetchAlarms, deleteAlarm };
+async function addAlarm(file) {
+  console.log("Send", file);
+  const response = await axios.post(`${devUrl}/alarms`, {music: file, name: "auto"})
+  return response.data;
+}
+
+export { fetchAlarms, deleteAlarm, addAlarm };

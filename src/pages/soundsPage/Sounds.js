@@ -4,7 +4,7 @@ import { useFilePicker } from "use-file-picker";
 import Tr from "../../components/Tr";
 import useLayout from "../../hooks/useLayout";
 import useMount from "../../hooks/useMount";
-import { fetchAlarms } from "../../repositories/AlarmRepository";
+import { addAlarm, fetchAlarms } from "../../repositories/AlarmRepository";
 import { Audio } from "react-loader-spinner";
 import { DeleteSound } from "./components/deleteSound";
 
@@ -12,9 +12,12 @@ export default function Sounds() {
   const { setLayout } = useLayout();
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [file, setFile] = useState('');
   const [openFileSelector, { filesContent }] = useFilePicker({
-    accept: ".mp3",
+    accept: ".midi",
   });
+
+  const fileInput = useRef();
 
   const [alarms, setAlarms] = useState([]);
 
@@ -30,6 +33,25 @@ export default function Sounds() {
     }
   };
 
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
+  const handleChangeFile = event => {
+    console.log(event.target.files, event.target.files[0]);
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload = async () => {
+    console.log(file);
+    await addAlarm(await toBase64(file))
+      .then((res) => { }) // Handle the response from backend here
+      .catch((err) => { }); // Catch errors if any
+  }
+
   useMount(() => {
     setLayout({
       title: "Sons",
@@ -42,7 +64,8 @@ export default function Sounds() {
     setShowModal(!showModal);
   };
 
-  const saveFile = () => {
+  const saveFile = async () => {
+    await addAlarm(file)
     toggleModal();
   };
 
@@ -53,14 +76,7 @@ export default function Sounds() {
       {showModal && (
         <div className="absolute mx-auto p-5 border w-96 shadow-lg rounded-md bg-white centerAbsolute">
           <div className="mt-3 text-center">
-            <button
-              onClick={() => {
-                openFileSelector();
-              }}
-              className="bg-green-500 rounded-xl py-2 px-4 text-white hover:bg-green-600"
-            >
-              Parcourir
-            </button>
+            <input type={"file"} onChange={e => handleChangeFile(e)} className="bg-green-500 rounded-xl py-2 px-4 text-white hover:bg-green-600"/>
             {filesContent.length === 0 && (
               <h3 className="text-lg leading-6 font-medium text-gray-800 my-4">
                 Aucun fichier sélectionné
@@ -73,7 +89,7 @@ export default function Sounds() {
               <button
                 id="ok-btn"
                 className="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                onClick={saveFile}
+                onClick={handleUpload}
               >
                 Ajouter
               </button>
