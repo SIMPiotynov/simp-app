@@ -1,3 +1,3 @@
-const devUrl = 'http://localhost:8080';
+const devUrl = 'http://localhost:8000';
 
 export { devUrl };
