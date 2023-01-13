@@ -3,13 +3,23 @@ import React, { useState, useEffect } from "react";
 import { useFilePicker } from "use-file-picker";
 import audio from "../assets/sonFusil.mp3";
 import Tr from "../components/Tr";
+import useLayout from "../hooks/useLayout";
+import useMount from "../hooks/useMount";
 import { fetchAlarms } from "../repositories/AlarmRepository";
 
 export default function Sounds() {
+  const { setLayout } = useLayout();
   const [showModal, setShowModal] = useState(false);
   const [openFileSelector, { filesContent }] = useFilePicker({
     accept: ".mp3",
   });
+
+  useMount(() => {
+    setLayout({
+      title: "Sons",
+      activeMenuKeys: ["Sons"],
+    });
+  }); 
 
   const [alarms, setAlarms] = useState([]);
   useEffect(() => {
