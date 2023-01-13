@@ -21,7 +21,6 @@ export const DeleteAlert = forwardRef(({ reload }, ref) => {
             alert("Erreur API");
         }
         setVisible(!visible);
-
     };
 
     return (<> {visible && user && (<div className="absolute mx-auto p-5 border w-96 shadow-lg rounded-md bg-white centerAbsolute">
