@@ -12,16 +12,9 @@ async function deleteAlarm(id) {
   return response.data;
 }
 
-<<<<<<< Updated upstream
-async function addAlarm(file) {
-  console.log("Send", file);
-  const response = await axios.post(`${devUrl}/alarms`, {music: file, name: "auto"})
-  return response.data;
-=======
 async function addAlarm(data) {
   const response = await axios.post(`${devUrl}/alarms`, data)
     return response.data;
->>>>>>> Stashed changes
 }
 
 export { fetchAlarms, deleteAlarm, addAlarm };
