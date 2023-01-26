@@ -7,7 +7,7 @@ async function fetchUsers() {
   return response.data;
 }
 
-async function getUserById(id, data) {
+async function getUserById(id) {
   const response = await axios.get(`${devUrl}/users/${id}`)
   return response.data;
 }
@@ -17,9 +17,14 @@ async function updateUser(id, data) {
     return response.data;
 }
 
+async function addUser(data) {
+  const response = await axios.post(`${devUrl}/users`, data)
+    return response.data;
+}
+
 async function deleteUser(id) {
   const response = await axios.delete(`${devUrl}/users/${id}`)
   return response.data;
 }
 
-export { fetchUsers, getUserById, updateUser, deleteUser };
+export { fetchUsers, getUserById, updateUser, deleteUser, addUser };

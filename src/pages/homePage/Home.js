@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../assets/SIMP.png";
-import useLayout from "../hooks/useLayout";
-import useMount from "../hooks/useMount";
+import logo from "../../assets/SIMP.png";
+import useLayout from "../../hooks/useLayout";
+import useMount from "../../hooks/useMount";
 
 export default function Home() {
   const { setLayout } = useLayout();

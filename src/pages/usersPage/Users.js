@@ -1,12 +1,12 @@
-import { PencilLine, Trash } from "phosphor-react";
+import { ClockCounterClockwise, PencilLine, Trash } from "phosphor-react";
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Tr from "../components/Tr";
-import { fetchUsers } from "../repositories/UserRepository";
-import { DeleteAlert } from "../components/deleteAlert";
-import useMount from "../hooks/useMount";
-import useLayout from "../hooks/useLayout";
-import Badge from "../components/Badge";
+import Tr from "../../components/Tr";
+import { fetchUsers } from "../../repositories/UserRepository";
+import { DeleteUser } from "./components/deleteUser";
+import useMount from "../../hooks/useMount";
+import useLayout from "../../hooks/useLayout";
+import Badge from "../../components/Badge";
 import { Audio } from "react-loader-spinner";
 
 export default function Users() {
@@ -39,7 +39,12 @@ export default function Users() {
       <div className="text-3xl text-slate-700 text-right font-bold">
         Utilisateurs
       </div>
-      <DeleteAlert ref={editModal} reload={fetchData}></DeleteAlert>
+      <DeleteUser ref={editModal} reload={fetchData}></DeleteUser>
+      <Link to={`/users/add`}>
+        <div className="w-fit bg-blue-500 rounded-xl py-2 px-4 text-white hover:bg-blue-600">
+          Ajouter un utilisateur
+        </div>
+      </Link>
       {!loading && (
         <table className="w-full mt-10 bg-slate-100">
           <thead>
@@ -65,14 +70,19 @@ export default function Users() {
                       <Badge color="danger" label="Non Authorisé" />
                     )}
                   </td>
-                  <td className="flex px-6 justify-end">
-                    <Link
-                      to={`/users/${user.id}`}
-                    >
+                  <td className="flex px-6 justify-end space-x-2">
+                    <Link to={`/users/${user.id}/history`}>
+                      <ClockCounterClockwise
+                        weight="bold"
+                        size="20"
+                        className="hover:cursor-pointer font-bold my-2 hover:text-blue-500"
+                      />
+                    </Link>
+                    <Link to={`/users/${user.id}`}>
                       <PencilLine
                         weight="bold"
                         size="20"
-                        className="hover:cursor-pointer font-bold mx-2 my-2 hover:text-blue-500"
+                        className="hover:cursor-pointer font-bold my-2 hover:text-blue-500"
                       />
                     </Link>
                     <Trash

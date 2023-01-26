@@ -1,7 +1,7 @@
 import React, {forwardRef, useImperativeHandle, useState} from "react";
-import {deleteUser} from "../repositories/UserRepository";
+import {deleteUser} from "../../../repositories/UserRepository";
 
-export const DeleteAlert = forwardRef(({ reload }, ref) => {
+export const DeleteUser = forwardRef(({ reload }, ref) => {
     useImperativeHandle(ref, () => ({
         show: (user) => {
             setUser(user);

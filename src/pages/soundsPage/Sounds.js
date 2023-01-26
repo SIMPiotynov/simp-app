@@ -9,12 +9,17 @@ import { Audio } from "react-loader-spinner";
 import { DeleteSound } from "./components/deleteSound";
 
 export default function Sounds() {
+  const [confirm, setConfirm] = useState(false);
   const { setLayout } = useLayout();
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
   const [file, setFile] = useState('');
   const [openFileSelector, { filesContent }] = useFilePicker({
+<<<<<<< Updated upstream
     accept: ".midi",
+=======
+    accept: [".mid", ".midi"],
+>>>>>>> Stashed changes
   });
 
   const fileInput = useRef();
@@ -65,7 +70,15 @@ export default function Sounds() {
   };
 
   const saveFile = async () => {
+<<<<<<< Updated upstream
     await addAlarm(file)
+=======
+    if (!confirm) {
+      setConfirm(!confirm);
+      await addAlarm(filesContent[0]).catch((e) => alert(e));
+      setConfirm(!confirm);
+    }
+>>>>>>> Stashed changes
     toggleModal();
   };
 
@@ -76,7 +89,18 @@ export default function Sounds() {
       {showModal && (
         <div className="absolute mx-auto p-5 border w-96 shadow-lg rounded-md bg-white centerAbsolute">
           <div className="mt-3 text-center">
+<<<<<<< Updated upstream
             <input type={"file"} onChange={e => handleChangeFile(e)} className="bg-green-500 rounded-xl py-2 px-4 text-white hover:bg-green-600"/>
+=======
+            <div
+              onClick={() => {
+                openFileSelector();
+              }}
+              className="bg-green-500 rounded-xl py-2 px-4 text-white hover:bg-green-600 hover:cursor-pointer"
+            >
+              Parcourir
+            </div>
+>>>>>>> Stashed changes
             {filesContent.length === 0 && (
               <h3 className="text-lg leading-6 font-medium text-gray-800 my-4">
                 Aucun fichier sélectionné
